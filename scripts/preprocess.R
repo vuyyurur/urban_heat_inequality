@@ -45,15 +45,12 @@ census_geo$Mean_Temp <- extract(modis_temp_agg, census_geo, fun = mean, na.rm = 
 census_geo <- census_geo %>% 
   filter(!is.na(Median_Income), Median_Income > 0, !is.na(Mean_Temp))
 
-# Convert to Celsius
 census_geo$Mean_Temp_C <- census_geo$Mean_Temp - 273.15
 
-# Verify
 print("Final rows:")
 print(nrow(census_geo))
 print(summary(census_geo$Median_Income))
 print(summary(census_geo$Mean_Temp_C))
 
-# Save
 saveRDS(census_geo, "data/census_geo.rds")
 print("Saved to data/census_geo.rds")
